@@ -1,6 +1,9 @@
 const express = require('express');
 const sequelize = require('../config/db');
 const User = require('../src/models/user');
+const Product = require('../src/models/product');
+const Order = require('../src/models/order')
+const Cart = require('../src/models/cart')
 
 require('dotenv').config();
 
@@ -21,12 +24,6 @@ app.get('/', (req, res) => {
         console.error(`Unable to connect to the database ${error}`);
     }
 })();
-
-sequelize.sync().then(() => {
-    console.log('User table created successfully!');
-}).catch((error) => {
-    console.error(`Unable to create table ${error}`);
-});
 
 app.listen(port, () => {
     console.log(`App is listening on port ${port}`);

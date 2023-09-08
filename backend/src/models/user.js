@@ -18,6 +18,11 @@ const User = sequelize.define('users', {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    phonenumber: {
+        type: DataTypes.STRING(20),
+        allowNull: false,
+        unique: true,
+    },
     createdAt: {
         type: DataTypes.DATE,
         defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
@@ -26,7 +31,20 @@ const User = sequelize.define('users', {
         type: DataTypes.DATE,
         defaultValue: sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
     },
-    //{ timestamps: true } 
+    resetToken: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    resetTokenExpiresAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+    },
+});
+
+User.sync({ alter: true }).then(() => {
+    console.log('User table created successfully!');
+}).catch((error) => {
+    console.error(`Unable to create table ${error}`);
 });
 
 
