@@ -1,0 +1,10 @@
+Requirements to successfully run the backend server
+
+1. Run npm install in the root directory not in backend directory
+2. Create a .env file in the root directory also.
+3. Create the following environment variables in the .env file based on your mysql configurations.
+    a. MYSQL_HOST
+    b. MYSQL_USER
+    c. MYSQL_PASSWORD
+    d. MYSQL_DB
+    6. PORT
