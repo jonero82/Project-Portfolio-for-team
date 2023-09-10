@@ -1,15 +1,19 @@
-const { Sequelize } = require('sequelize');
-//const User = require('../src/models/user');
-require('dotenv').config();
+const User = require('../src/models/user');
+const Product = require('../src/models/product');
+const Order = require('../src/models/order');
+const Cart = require('../src/models/cart');
 
-const userName = process.env.MYSQL_USER || 'localhost';
-const password = process.env.MYSQL_PASSWORD || 'password';
-const database = process.env.MYSQL_DB || 'project';
-const host = process.env.MYSQL_HOST || 'localhost';
+const synchronozeModels = async () => {
+    try {
+        await User.sync();
+        await Product.sync();
+        await Order.sync();
+        await Cart.sync();
 
-const sequelize = new Sequelize(database, userName, password, {
-    host: host,
-    dialect: 'mysql',
-});
+        console.log('Database synchronized');
+    } catch (error) {
+        console.error(`Error Synchronizing database ${error}`);
+    }
+}
 
-module.exports = sequelize;
+module.exports = synchronozeModels;

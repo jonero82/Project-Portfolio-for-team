@@ -1,5 +1,5 @@
 const { DataTypes, DATE, Model } = require('sequelize');
-const sequelize = require('../../config/db');
+const sequelize = require('../../config/config');
 const User = require('./user');
 const Product = require('./product');
 
@@ -37,10 +37,5 @@ Order.belongsTo(Product, {
     onUpdate: 'CASCADE',
 });
 
-Order.sync({ alter: true }).then(() => {
-    console.log('Order table created successfully!');
-}).catch((error) => {
-    console.error(`An error occurred! ${error}`);
-});
 
 module.exports=Order;

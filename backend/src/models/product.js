@@ -1,5 +1,5 @@
 const { DataTypes, DATE } = require('sequelize');
-const sequelize = require("../../config/db");
+const sequelize = require("../../config/config");
 const User = require('./user');
 
 const Product = sequelize.define('products', {
@@ -45,10 +45,5 @@ Product.belongsTo(User, {
     onUpdate: 'CASCADE',
 });
 
-Product.sync({alter: true}).then(() => {
-    console.log('Product table created successfully!');
-}).catch((error) => {
-    console.error(`Unable to create table ${error}`);
-});
 
 module.exports = Product;
