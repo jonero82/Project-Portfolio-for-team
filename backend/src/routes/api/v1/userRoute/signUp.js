@@ -1,5 +1,5 @@
 const signUp  = require('../../../../controllers/userController/signUp');
-const { signUpValidation } = require('../../../../utils/signupValidation');
+const signUpValidation  = require('../../../../utils/signupValidation');
 
 const router = require('express').Router();
 

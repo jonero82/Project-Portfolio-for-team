@@ -1,7 +1,6 @@
 const { validationResult } = require('express-validator');
 const User = require('../../models/user');
 const bcrypt = require('bcrypt');
-// const signUpValidation = require('../../utils/signupValidation');
 
 const signUp = async (req, res) => {
     try {
