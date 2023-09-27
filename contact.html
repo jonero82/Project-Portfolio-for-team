@@ -1,110 +1,77 @@
+<?php
+
+include 'config.php';
+
+session_start();
+
+$user_id = $_SESSION['user_id'];
+
+if(!isset($user_id)){
+   header('location:login.php');
+}
+
+if(isset($_POST['send'])){
+
+   $name = mysqli_real_escape_string($conn, $_POST['name']);
+   $email = mysqli_real_escape_string($conn, $_POST['email']);
+   $number = $_POST['number'];
+   $msg = mysqli_real_escape_string($conn, $_POST['message']);
+
+   $select_message = mysqli_query($conn, "SELECT * FROM `message` WHERE name = '$name' AND email = '$email' AND number = '$number' AND message = '$msg'") or die('query failed');
+
+   if(mysqli_num_rows($select_message) > 0){
+      $message[] = 'message sent already!';
+   }else{
+      mysqli_query($conn, "INSERT INTO `message`(user_id, name, email, number, message) VALUES('$user_id', '$name', '$email', '$number', '$msg')") or die('query failed');
+      $message[] = 'message sent successfully!';
+   }
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farmers-Market</title>
-    <script src="https://kit.fontawesome.com/b51062a313.js" crossorigin="anonymous"></script>
-    <link href="./style.css" rel="stylesheet"/>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>contact</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-    <!--Creating header section-->
-    <section id="header">
-        <a href="#" class="logo"><img src="./assets/logo.png" alt="farmers market logo"></a>
+   
+<?php include 'header.php'; ?>
 
-        <!--Creating navigation bar-->
-        <div>
-            <ul id="navbar">
-                <li><a href="home.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a class="active" href="contact.html">Contact Us</a></li>
-                <li id="my_cart"><a href="cart.html"><i class="fa-solid fa-cart-arrow-down"></i></a></li>
-                <a href="#" id="close"><i class="fa-solid fa-x"></i></a>
-            </ul>
-        </div>
-        <div id="mobile">
-            <a href="cart.html"><i class="fa-solid fa-cart-arrow-down"></i></a>
-            <i id="bar" class="fas fa-outdent"></i>
-        </div>
-        
-    </section>
+<div class="heading">
+   <p> <a href="home.php">Home</a> / Contact </p>
+</div>
 
-    <!--Creating header page-->
-    <section id="header-page" class="about-header">
-        <h1>Contact Farmers Market</h1>
-    </section>
+<section class="contact">
 
-    <!--Creating contact us page-->
-    <section id="contact-details" class="section-padding">
-        <div class="details">
-            <h2>Contact Us</h2>
-            <div>
-                <li>
-                    <i class="far fa-envelope"></i>
-                    <p>farmersmarket@gmail.com</p>
-                </li>
-                <li>
-                    <i class="fa-solid fa-phone"></i>
-                    <p>+234701000000</p>
-                </li>
-            </div>
-        </div>
-    </section>
+   <form action="" method="post">
+      <h3>Contact Farmers Market</h3>
+      <input type="text" name="name" required placeholder="Enter your name" class="box">
+      <input type="email" name="email" required placeholder="Enter your email" class="box">
+      <input type="number" name="number" required placeholder="Enter your number" class="box">
+      <textarea name="message" class="box" placeholder="Enter your message" id="" cols="30" rows="10"></textarea>
+      <input type="submit" value="send message" name="send" class="btn">
+   </form>
 
-    <!--Creating email section-->
-    <section id="form-details">
-        <form action="#">
-            <span>Leave us a message</span>
-            <input type="text" placeholder="Enter your name">
-            <input type="text" placeholder="Enter your email">
-            <input type="text" placeholder="Enter your subject">
-            <textarea name="" id="" cols="30" rows="10" placeholder="Enter your message"></textarea>
-            <button>Submit</button>
-        </form>
-        <div class="team">
-            <div>
-                <img src="./assets/kasheem.jpg" alt="">
-                <p><span>Abdulazeez Kasheem</span><br>Frontend Software Engineer</p>
-            </div>
-        </div>
-    </section>
+</section>
 
-    <!--Creating footer-->
-    <footer class="section-padding">
-        <div class="column">
-            <img class="logo" src="./assets/logo.png" alt="logo">
-            <h4>Contact Us</h4>
-            <p><strong>Adress: </strong>Plot 100, Road 1, <br>Platinum city avenue, Abuja, Nigeria</p>
-            <p><strong>Phone: </strong>+234701000000</p>
-            <p><strong>Email: </strong>farmersmarket@gmail.com</p>
-            <div class="social">
-                <h4>Follow Us</h4>
-                <div class="icons">
-                    <i class="fab fa-facebook"></i>
-                    <i class="fab fa-instagram"></i>
-                    <i class="fab fa-twitter"></i>
-                </div>
-            </div>
-        </div>
-        <div class="column">
-            <h4>About</h4>
-            <a href="#">About Us</a>
-            <a href="#">Delivery Information</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Service Terms & Conditions</a>
-        </div>
-        <div class="column">
-            <h4>SignIn</h4>
-            <a href="#">View Cart</a>
-            <a href="#">Track My Order</a>
-            <a href="#">Help</a>
-        </div>
-        <div class="copyright">
-            <p>&copy; 2023 Farmers Market</p>
-        </div>
-    </footer>
 
-    <script src="./script.js"></script>
+
+<?php include 'footer.php'; ?>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
 </body>
 </html>

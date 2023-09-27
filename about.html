@@ -1,98 +1,170 @@
+<?php
+
+include 'config.php';
+
+session_start();
+
+$user_id = $_SESSION['user_id'];
+
+if(!isset($user_id)){
+   header('location:login.php');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farmers-Market</title>
-    <script src="https://kit.fontawesome.com/b51062a313.js" crossorigin="anonymous"></script>
-    <link href="./style.css" rel="stylesheet"/>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>about</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-    <!--Creating header section-->
-    <section id="header">
-        <a href="#" class="logo"><img src="./assets/logo.png" alt="farmers market logo"></a>
+   
+<?php include 'header.php'; ?>
 
-        <!--Creating navigation bar-->
-        <div>
-            <ul id="navbar">
-                <li><a href="home.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <li><a  class="active" href="about.html">About</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-                <li id="my_cart"><a href="cart.html"><i class="fa-solid fa-cart-arrow-down"></i></a></li>
-                <a href="#" id="close"><i class="fa-solid fa-x"></i></a>
-            </ul>
-        </div>
-        <div id="mobile">
-            <a href="cart.html"><i class="fa-solid fa-cart-arrow-down"></i></a>
-            <i  id="bar" class="fas fa-outdent"></i>
-        </div>
-        
-    </section>
+<div class="heading">
+   <p> <a href="home.php">Home</a> / About </p>
+</div>
 
-    <!--Creating hero section-->
-    <section id="header-page" class="about-header">
-        <h1>About Farmers Market</h1>
-    </section>
-    <section id="about_header" class="section-padding">
-        <img src="./assets/about.jpg" alt="">
-        <div>
-            <h2>Who Are We</h2>
-            <p>Farmers Market is a web based application that allows the general public to buy farm produce directly from the farm.
-                <br> <strong>Mission:</strong> Our mission is to bridge the gap between the consumers and the farmers. 
-                Due to the continued increase in inflation, the cost of consumables have become unbearable and people are dearly in need of a better means of buying their consumables.
-                Creating a platform that allow people to buy their consumables in bulk directly from the farm will give them the opportunity to buy at a cheaper rate. Hence reducing the effect of inflation on our users and enabling them to save more money.
-                <br><strong>Vision:</strong> Our vision is to be among the leading successful e-commerces in the world that brings comfort and happiness to its users.</p>
-        </div>
-    </section>
+<section class="about">
 
-     <!--Creating newslette page-->
-     <section id="newsletter" class="section-padding">
-        <div class="newstext">
-            <h3>Signup for our newsletters</h3>
-            <p>Receive Email updates about our products and promos.</p>
-        </div>
-        <div class="form">
-            <input type="text" placeholder="Enter your email">
-            <button>Signup</button>
-        </div>
-    </section>
+   <div class="flex">
 
-    <!--Creating footer-->
-    <footer class="section-padding">
-        <div class="column">
-            <img class="logo" src="./assets/logo.png" alt="logo">
-            <h4>Contact Us</h4>
-            <p><strong>Adress: </strong>Plot 100, Road 1, <br>Platinum city avenue, Abuja, Nigeria</p>
-            <p><strong>Adress: </strong>+234701000000</p>
-            <p><strong>Email: </strong>farmersmarket@gmail.com</p>
-            <div class="social">
-                <h4>Follow Us</h4>
-                <div class="icons">
-                    <i class="fab fa-facebook"></i>
-                    <i class="fab fa-instagram"></i>
-                    <i class="fab fa-twitter"></i>
-                </div>
-            </div>
-        </div>
-        <div class="column">
-            <h4>About</h4>
-            <a href="#">About Us</a>
-            <a href="#">Delivery Information</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Service Terms & Conditions</a>
-        </div>
-        <div class="column">
-            <h4>SignIn</h4>
-            <a href="#">View Cart</a>
-            <a href="#">Track My Order</a>
-            <a href="#">Help</a>
-        </div>
-        <div class="copyright">
-            <p>&copy; 2023 Farmers Market</p>
-        </div>
-    </footer>
+      <div class="image">
+         <img src="assets/about.jpg" alt="about us image">
+      </div>
 
-    <script src="./script.js"></script>
+      <div class="content">
+         <h3>About Farmers Market</h3>
+         <p>Farmers Market is a web based application that allows the general public to buy farm produce directly from the farm.</p>
+         <p><strong>Mission:</strong> Our mission is to bridge the gap between the consumers and the farmers. 
+            Creating a platform that allow people to buy directly from the 
+            farm will help in mitigating the effect of inflation on the general public.</p>
+         <p><strong>Vision:</strong> Our vision is to be among the leading successful e-commerces in the 
+            world that brings comfort and happiness to its users.</p>
+         <a href="contact.php" class="btn">contact us</a>
+      </div>
+
+   </div>
+
+</section>
+
+<section class="reviews">
+
+   <h1 class="title">client's reviews</h1>
+
+   <div class="box-container">
+
+      <div class="box">
+         <img src="assets/client1.jpg" alt="client image">
+         <p>Since i started using Farmers Market everything have become easy and smooth for me.</p>
+         <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+         </div>
+         <h3>Dr. Safuriyawu Ahmed</h3>
+      </div>
+
+      <div class="box">
+         <img src="assets/client2.jpg" alt="client image">
+         <p>Since i started using Farmers Market everything have become easy and smooth for me.</p>
+         <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+         </div>
+         <h3>Aminu Binta</h3>
+      </div>
+
+      <div class="box">
+         <img src="assets/client3.jpg" alt="client image">
+         <p>Since i started using Farmers Market everything have become easy and smooth for me.</p>
+         <div class="stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+         </div>
+         <h3>Mrs Anderson</h3>
+      </div>
+
+   </div>
+
+</section>
+
+<section class="authors">
+
+   <h1 class="title">Team Members</h1>
+
+   <div class="box-container">
+
+      <div class="box">
+         <img src="assets/abiodun.jpg" alt="team image">
+         <div class="share">
+            <a href="#" class="fab fa-facebook-f"></a>
+            <a href="#" class="fab fa-twitter"></a>
+            <a href="#" class="fab fa-instagram"></a>
+            <a href="#" class="fab fa-linkedin"></a>
+         </div>
+         <h3>Abiodun Ogunremi</h3>
+      </div>
+
+      <div class="box">
+         <img src="assets/kasheem.jpg" alt="team image">
+         <div class="share">
+            <a href="#" class="fab fa-facebook-f"></a>
+            <a href="#" class="fab fa-twitter"></a>
+            <a href="#" class="fab fa-instagram"></a>
+            <a href="#" class="fab fa-linkedin"></a>
+         </div>
+         <h3>Abdulazeez Kasheem</h3>
+      </div>
+
+      <div class="box">
+         <img src="assets/joy.jpg" alt="team image">
+         <div class="share">
+            <a href="#" class="fab fa-facebook-f"></a>
+            <a href="#" class="fab fa-twitter"></a>
+            <a href="#" class="fab fa-instagram"></a>
+            <a href="#" class="fab fa-linkedin"></a>
+         </div>
+         <h3>Rejoice Gono</h3>
+      </div>
+
+      <div class="box">
+         <img src="assets/mathiew.jpg" alt="">
+         <div class="share">
+            <a href="#" class="fab fa-facebook-f"></a>
+            <a href="#" class="fab fa-twitter"></a>
+            <a href="#" class="fab fa-instagram"></a>
+            <a href="#" class="fab fa-linkedin"></a>
+         </div>
+         <h3>Ndubuisi Matthew</h3>
+      </div>
+   </div>
+
+</section>
+
+
+<?php include 'footer.php'; ?>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
 </body>
 </html>
