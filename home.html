@@ -1,413 +1,135 @@
+<?php
+
+include 'config.php';
+
+session_start();
+
+$user_id = $_SESSION['user_id'];
+
+if(!isset($user_id)){
+   header('location:login.php');
+}
+
+if(isset($_POST['add_to_cart'])){
+
+   $product_name = $_POST['product_name'];
+   $product_price = $_POST['product_price'];
+   $product_image = $_POST['product_image'];
+   $product_quantity = $_POST['product_quantity'];
+
+   $check_cart_numbers = mysqli_query($conn, "SELECT * FROM `cart` WHERE name = '$product_name' AND user_id = '$user_id'") or die('query failed');
+
+   if(mysqli_num_rows($check_cart_numbers) > 0){
+      $message[] = 'already added to cart!';
+   }else{
+      mysqli_query($conn, "INSERT INTO `cart`(user_id, name, price, quantity, image) VALUES('$user_id', '$product_name', '$product_price', '$product_quantity', '$product_image')") or die('query failed');
+      $message[] = 'product added to cart!';
+   }
+
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farmers-Market</title>
-    <script src="https://kit.fontawesome.com/b51062a313.js" crossorigin="anonymous"></script>
-    <link href="./style.css" rel="stylesheet"/>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>home</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-    <!--Creating header section-->
-    <section id="header">
-        <a href="#" class="logo"><img src="./assets/logo.png" alt="farmers market logo"></a>
+   
+<?php include 'header.php'; ?>
 
-        <!--Creating navigation bar-->
-        <div>
-            <ul id="navbar">
-                <li><a class="active" href="home.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-                <li id="my_cart"><a href="cart.html"><i class="fa-solid fa-cart-arrow-down"></i></a></li>
-                <a href="#" id="close"><i class="fa-solid fa-x"></i></a>
-            </ul>
-        </div>
-        <div id="mobile">
-            <a href="cart.html"><i class="fa-solid fa-cart-arrow-down"></i></a>
-            <i id="bar" class="fas fa-outdent"></i>
-        </div>
-        
-    </section>
+<section class="home">
 
-    <!--Creating hero section-->
-    <section id="hero">
-        <h1>Welcome to Farmers Market</h1>
-        <h2>Where you buy directly from the farmers at the cheapest rates.</h2>
-        <button>Buy Now</button>
-    </section>
+   <div class="content">
+      <h3>Welcome to Farmers Market</h3>
+      <p>Where you buy directly from the farmers at the cheapest rates.</p>
+      <a href="about.php" class="white-btn">discover more</a>
+   </div>
 
-    <!--Creating features-->
-    <section id="features" class="section-padding">
-        <div class="f-box">
-            <img src="./assets/beans.jpg" alt="beans in a bag">
-            <h5>Grains</h5>
-        </div>
-        <div class="f-box">
-            <img src="./assets/garri.jpeg" alt="beans in a bag">
-            <h5>Garri</h5>
-        </div>
-        <div class="f-box">
-            <img src="./assets/oil.png" alt="beans in a bag">
-            <h5>Oil</h5>
-        </div>
-        <div class="f-box">
-            <img src="./assets/irish.jpeg" alt="beans in a bag">
-            <h5>Tubers</h5>
-        </div>
-        <div class="f-box">
-            <img src="./assets/goat.jpeg" alt="beans in a bag">
-            <h5>Live stcks</h5>
-        </div>
-    </section>
-    <hr>
+</section>
 
-    <!--creating available products-->
-    <section id="products" class="section-padding">
-        <h1>Available Products</h1>
-        <p>Here are the consumables presently availabe in Farm Market</p>
-        <div class="products-container">
-            <div class="pro">
-                <img src="./assets/oil.jpeg" alt="red oil"/>
-                <div class="description">
-                    <span>Minimum buy: 25L</span>
-                    <h4>Red Oil</h4>
-                    <h3>&#8358;30,000</h3>
-                </div>
-            </div>
-            <div class="pro">
-                <img src="./assets/garri2.jpg" alt="red garri"/>
-                <div class="description">
-                    <span>Minimum buy: 1bag</span>
-                    <h4>Red Garri</h4>
-                    <h3>&#8358;15,000</h3>
-                </div>
-            </div>
-            <div class="pro">
-                <img src="./assets/beans2.jpg" alt="beans"/>
-                <div class="description">
-                    <span>Minimum buy: 1bag</span>
-                    <h4>White Beans</h4>
-                    <h3>&#8358;45,000</h3>
-                </div>
-            </div>
-            <div class="pro">
-                <img src="./assets/sweetpotatoes.jpeg" alt="potatoes"/>
-                <div class="description">
-                    <span>Minimum buy: 1bag</span>
-                    <h4>Sweet Potatoes</h4>
-                    <h3>&#8358;25,000</h3>
-                </div>
-            </div>
-            <div class="pro">
-                <img src="./assets/irish.jpeg" alt="irish"/>
-                <div class="description">
-                    <span>Minimum buy: 1bag</span>
-                    <h4>Irish Potatoes</h4>
-                    <h3>&#8358;35,000</h3>
-                </div>
-            </div>
-            <div class="pro">
-                <img src="./assets/yam.jpeg" alt="yam"/>
-                <div class="description">
-                    <span>Minimum buy: 10tubbers</span>
-                    <h4>White Yam</h4>
-                    <h3>&#8358;7,000</h3>
-                </div>
-            </div>
-            <div class="pro">
-                <img src="./assets/goat.jpeg" alt="red oil"/>
-                <div class="description">
-                    <span>Minimum buy: 5goats</span>
-                    <h4>Local Goat</h4>
-                    <h3>&#8358;150,000</h3>
-                </div>
-            </div>
-            <div class="pro">
-                <img src="./assets/cow.jpeg" alt="cow"/>
-                <div class="description">
-                    <span>Minimum buy: 1cow</span>
-                    <h4>Matured Cow</h4>
-                    <h3>&#8358;255,000</h3>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="products">
 
-    <!--Creating a banner-->
-    <section id="barner">
-        <h1>Farmers Market</h1>
-        <h4>Buy Organic, Buy Local, Buy Cheap</h4>
-    </section>
+   <h1 class="title">latest products</h1>
 
-    <!--creating grain products-->
-    <section id="products" class="section-padding">
-        <h1>Grains</h1>
-        <p>Here are the grains presently availabe in Farm Market</p>
-        <div class="products-container">
-            <div class="pro">
-                <img src="./assets/beans2.jpg" alt="red oil"/>
-                <div class="description">
-                    <span>Minimum buy: 25L</span>
-                    <h4>Red Oil</h4>
-                    <h3>&#8358;30,000</h3>
-                </div>
-            </div>
-            <div class="pro">
-                <img src="./assets/beans.jpg" alt="red garri"/>
-                <div class="description">
-                    <span>Minimum buy: 1bag</span>
-                    <h4>Red Garri</h4>
-                    <h3>&#8358;15,000</h3>
-                </div>
-            </div>
-            <div class="pro">
-                <img src="./assets/beans2.jpg" alt="beans"/>
-                <div class="description">
-                    <span>Minimum buy: 1bag</span>
-                    <h4>White Beans</h4>
-                    <h3>&#8358;45,000</h3>
-                </div>
-            </div>
-            <div class="pro">
-                <img src="./assets/beans.jpg" alt="potatoes"/>
-                <div class="description">
-                    <span>Minimum buy: 1bag</span>
-                    <h4>Sweet Potatoes</h4>
-                    <h3>&#8358;25,000</h3>
-                </div>
-            </div>
-        </div>
-        <hr>
-    </section>
+   <div class="box-container">
 
-    <!--creating garri products-->
-    <section id="products" class="section-padding">
-        <h1>Garri</h1>
-        <p>Here are the garri presently availabe in Farm Market</p>
-        <div class="products-container">
-            <div class="pro">
-                <img src="./assets/garri2.jpg" alt="red oil"/>
-                <div class="description">
-                    <span>Minimum buy: 25L</span>
-                    <h4>Red Oil</h4>
-                    <h3>&#8358;30,000</h3>
-                </div>
-            </div>
-            <div class="pro">
-                <img src="./assets/garri2.jpg" alt="red garri"/>
-                <div class="description">
-                    <span>Minimum buy: 1bag</span>
-                    <h4>Red Garri</h4>
-                    <h3>&#8358;15,000</h3>
-                </div>
-            </div>
-            <div class="pro">
-                <img src="./assets/garri2.jpg" alt="beans"/>
-                <div class="description">
-                    <span>Minimum buy: 1bag</span>
-                    <h4>White Beans</h4>
-                    <h3>&#8358;45,000</h3>
-                </div>
-            </div>
-            <div class="pro">
-                <img src="./assets/garri2.jpg" alt="potatoes"/>
-                <div class="description">
-                    <span>Minimum buy: 1bag</span>
-                    <h4>Sweet Potatoes</h4>
-                    <h3>&#8358;25,000</h3>
-                </div>
-            </div>
-        </div>
-        <hr>
-    </section>
+      <?php  
+         $select_products = mysqli_query($conn, "SELECT * FROM `products` LIMIT 6") or die('query failed');
+         if(mysqli_num_rows($select_products) > 0){
+            while($fetch_products = mysqli_fetch_assoc($select_products)){
+      ?>
+     <form action="" method="post" class="box">
+      <img class="image" src="uploaded_img/<?php echo $fetch_products['image']; ?>" alt="">
+      <div class="name"><?php echo $fetch_products['name']; ?></div>
+      <div class="price">₦<?php echo $fetch_products['price']; ?>/-</div>
+      <input type="number" min="1" name="product_quantity" value="1" class="qty">
+      <input type="hidden" name="product_name" value="<?php echo $fetch_products['name']; ?>">
+      <input type="hidden" name="product_price" value="<?php echo $fetch_products['price']; ?>">
+      <input type="hidden" name="product_image" value="<?php echo $fetch_products['image']; ?>">
+      <input type="submit" value="add to cart" name="add_to_cart" class="btn">
+     </form>
+      <?php
+         }
+      }else{
+         echo '<p class="empty">no products added yet!</p>';
+      }
+      ?>
+   </div>
 
-    <!--creating oil products-->
-    <section id="products" class="section-padding">
-        <h1>Oil</h1>
-        <p>Here are the oils presently availabe in Farm Market</p>
-        <div class="products-container">
-            <div class="pro">
-                <img src="./assets/oil.jpeg" alt="red oil"/>
-                <div class="description">
-                    <span>Minimum buy: 25L</span>
-                    <h4>Red Oil</h4>
-                    <h3>&#8358;30,000</h3>
-                </div>
-            </div>
-            <div class="pro">
-                <img src="./assets/oil.jpeg" alt="red garri"/>
-                <div class="description">
-                    <span>Minimum buy: 1bag</span>
-                    <h4>Red Garri</h4>
-                    <h3>&#8358;15,000</h3>
-                </div>
-            </div>
-            <div class="pro">
-                <img src="./assets/oil.jpeg" alt="beans"/>
-                <div class="description">
-                    <span>Minimum buy: 1bag</span>
-                    <h4>White Beans</h4>
-                    <h3>&#8358;45,000</h3>
-                </div>
-            </div>
-            <div class="pro">
-                <img src="./assets/oil.jpeg" alt="potatoes"/>
-                <div class="description">
-                    <span>Minimum buy: 1bag</span>
-                    <h4>Sweet Potatoes</h4>
-                    <h3>&#8358;25,000</h3>
-                </div>
-            </div>
-        </div>
-        <hr>
-    </section>
+   <div class="load-more" style="margin-top: 2rem; text-align:center">
+      <a href="shop.php" class="option-btn">load more</a>
+   </div>
 
-    <!--creating tubber products-->
-    <section id="products" class="section-padding">
-        <h1>Tubbers</h1>
-        <p>Here are the tubers presently availabe in Farm Market</p>
-        <div class="products-container">
-            <div class="pro">
-                <img src="./assets/yam.jpeg" alt="red oil"/>
-                <div class="description">
-                    <span>Minimum buy: 10tubbers</span>
-                    <h4>White Yam</h4>
-                    <h3>&#8358;30,000</h3>
-                </div>
-            </div>
-            <div class="pro">
-                <img src="./assets/sweetpotatoes.jpeg" alt="red garri"/>
-                <div class="description">
-                    <span>Minimum buy: 1bag</span>
-                    <h4>Sweet Potatoes</h4>
-                    <h3>&#8358;15,000</h3>
-                </div>
-            </div>
-            <div class="pro">
-                <img src="./assets/irish.jpeg" alt="beans"/>
-                <div class="description">
-                    <span>Minimum buy: 1bag</span>
-                    <h4>Irish Potatoes</h4>
-                    <h3>&#8358;45,000</h3>
-                </div>
-            </div>
-            <div class="pro">
-                <img src="./assets/sweetpotatoes.jpeg" alt="potatoes"/>
-                <div class="description">
-                    <span>Minimum buy: 1bag</span>
-                    <h4>Sweet Potatoes</h4>
-                    <h3>&#8358;25,000</h3>
-                </div>
-            </div>
-        </div>
-        <hr>
-    </section>
+</section>
 
-    <!--creating grain products-->
-    <section id="products" class="section-padding">
-        <h1>Live Stocks</h1>
-        <p>Here are the live stocks presently availabe in Farm Market</p>
-        <div class="products-container">
-            <div class="pro">
-                <img src="./assets/goat.jpeg" alt="red oil"/>
-                <div class="description">
-                    <span>Minimum buy: 25L</span>
-                    <h4>Red Oil</h4>
-                    <h3>&#8358;30,000</h3>
-                </div>
-            </div>
-            <div class="pro">
-                <img src="./assets/cow.jpeg" alt="red garri"/>
-                <div class="description">
-                    <span>Minimum buy: 1bag</span>
-                    <h4>Red Garri</h4>
-                    <h3>&#8358;15,000</h3>
-                </div>
-            </div>
-            <div class="pro">
-                <img src="./assets/goat.jpeg" alt="beans"/>
-                <div class="description">
-                    <span>Minimum buy: 1bag</span>
-                    <h4>White Beans</h4>
-                    <h3>&#8358;45,000</h3>
-                </div>
-            </div>
-            <div class="pro">
-                <img src="./assets/cow.jpeg" alt="potatoes"/>
-                <div class="description">
-                    <span>Minimum buy: 1bag</span>
-                    <h4>Sweet Potatoes</h4>
-                    <h3>&#8358;25,000</h3>
-                </div>
-            </div>
-        </div>
-        <hr>
-    </section>
+<section class="about">
 
-    <!--Creating baner2-->
-    <section id="banner2">
-        <div class="banner-box2">
-            <h2>EAT HEALTHY</h2>
-            <span>The best way to live long and healthy is to eat organics.</span>
-        </div>
-        <div class="banner-box3">
-            <h2>SAVE MONEY</h2>
-            <span>The best way to save money is buying cheap and smart.</span>
-        </div>
-        <div class="banner-box4">
-            <h2>STAY HAPPY</h2>
-            <span>Happines is spending lovely time with loved ones.</span>
-        </div>
-    </section>
+   <div class="flex">
 
-    <!--Creating newslette page-->
-    <section id="newsletter" class="section-padding">
-        <div class="newstext">
-            <h3>Signup for our newsletters</h3>
-            <p>Receive Email updates about our products and promos.</p>
-        </div>
-        <div class="form">
-            <input type="text" placeholder="Enter your email">
-            <button>Signup</button>
-        </div>
-    </section>
+      <div class="image">
+         <img src="assets/about.jpg" alt="">
+      </div>
 
-    <!--Creating footer-->
-    <footer class="section-padding">
-        <div class="column">
-            <img class="logo" src="./assets/logo.png" alt="logo">
-            <h4>Contact Us</h4>
-            <p><strong>Adress: </strong>Plot 100, Road 1, <br>Platinum city avenue, Abuja, Nigeria</p>
-            <p><strong>Adress: </strong>+234701000000</p>
-            <p><strong>Email: </strong>farmersmarket@gmail.com</p>
-            <div class="social">
-                <h4>Follow Us</h4>
-                <div class="icons">
-                    <i class="fab fa-facebook"></i>
-                    <i class="fab fa-instagram"></i>
-                    <i class="fab fa-twitter"></i>
-                </div>
-            </div>
-        </div>
-        <div class="column">
-            <h4>About</h4>
-            <a href="#">About Us</a>
-            <a href="#">Delivery Information</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Service Terms & Conditions</a>
-        </div>
-        <div class="column">
-            <h4>SignIn</h4>
-            <a href="#">View Cart</a>
-            <a href="#">Track My Order</a>
-            <a href="#">Help</a>
-        </div>
-        <div class="copyright">
-            <p>&copy; 2023 Farmers Market</p>
-        </div>
-    </footer>
+      <div class="content">
+         <h3>about us</h3>
+         <p>Farmers Market is a web based application that allows the general public to buy farm produce directly from the farm.</p>
+         <a href="about.php" class="btn">read more</a>
+      </div>
 
-    <script src="./script.js"></script>
+   </div>
+
+</section>
+
+<section class="home-contact">
+
+   <div class="content">
+      <h3>have any questions?</h3>
+      <p>Kindly click on the contact us button below to reach out to Farmers Market.</p>
+      <a href="contact.php" class="white-btn">contact us</a>
+   </div>
+
+</section>
+
+
+
+
+
+<?php include 'footer.php'; ?>
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+
 </body>
 </html>

@@ -1,14 +1,24 @@
-const bar = document.getElementById('bar');
-const close = document.getElementById('close');
-const nav = document.getElementById('navbar');
-if (bar) {
-    bar.addEventListener('click', () => {
-        nav.classList.add('active');
-    })
+let userBox = document.querySelector('.header .header-2 .user-box');
+
+document.querySelector('#user-btn').onclick = () =>{
+   userBox.classList.toggle('active');
+   navbar.classList.remove('active');
 }
 
-if (close) {
-    close.addEventListener('click', () => {
-        nav.classList.remove('active');
-    })
+let navbar = document.querySelector('.header .header-2 .navbar');
+
+document.querySelector('#menu-btn').onclick = () =>{
+   navbar.classList.toggle('active');
+   userBox.classList.remove('active');
+}
+
+window.onscroll = () =>{
+   userBox.classList.remove('active');
+   navbar.classList.remove('active');
+
+   if(window.scrollY > 60){
+      document.querySelector('.header .header-2').classList.add('active');
+   }else{
+      document.querySelector('.header .header-2').classList.remove('active');
+   }
 }
