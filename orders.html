@@ -20,10 +20,10 @@ if(!isset($user_id)){
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>orders</title>
 
-   <!-- font awesome cdn link  -->
+   <!--font awesome cdn link-->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-   <!-- custom css file link  -->
+   <!--css file link-->
    <link rel="stylesheet" href="style.css">
 
 </head>
@@ -52,10 +52,10 @@ if(!isset($user_id)){
          <p> Number : <span><?php echo $fetch_orders['number']; ?></span> </p>
          <p> Email : <span><?php echo $fetch_orders['email']; ?></span> </p>
          <p> Address : <span><?php echo $fetch_orders['address']; ?></span> </p>
-         <p> Payment method : <span><?php echo $fetch_orders['method']; ?></span> </p>
-         <p> Your orders : <span><?php echo $fetch_orders['total_products']; ?></span> </p>
-         <p> Total price : <span>₦<?php echo $fetch_orders['total_price']; ?>/-</span> </p>
-         <p> Payment status : <span style="color:<?php if($fetch_orders['payment_status'] == 'pending'){ echo 'red'; }else{ echo 'green'; } ?>;"><?php echo $fetch_orders['payment_status']; ?></span> </p>
+         <p> Payment Method : <span><?php echo $fetch_orders['method']; ?></span> </p>
+         <p> Your Orders : <span><?php echo $fetch_orders['total_products']; ?></span> </p>
+         <p> Total Price : <span>₦<?php echo $fetch_orders['total_price']; ?>/-</span> </p>
+         <p> Payment Status : <span style="color:<?php if($fetch_orders['payment_status'] == 'pending'){ echo 'red'; }else{ echo 'green'; } ?>;"><?php echo $fetch_orders['payment_status']; ?></span> </p>
          </div>
       <?php
        }
@@ -76,8 +76,8 @@ if(!isset($user_id)){
 
 <?php include 'footer.php'; ?>
 
-<!-- custom js file link  -->
-<script src="js/script.js"></script>
+<!--Javascript link-->
+<script src="script.js"></script>
 
 </body>
 </html>
