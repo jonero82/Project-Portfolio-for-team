@@ -199,7 +199,6 @@ section{
 .form-container form p a:hover{
    text-decoration: underline;
 }
-/*login styling ends*/
 
 .header .header-1{
    background-color: #89c4a3;
@@ -213,6 +212,7 @@ section{
    justify-content: space-between;
    max-width: 100%;
    margin:0 auto;
+   height: .5rem;
 }
 
 .header .header-2{
@@ -234,6 +234,7 @@ section{
    max-width: 100%;
    margin:0 auto;
    position: relative;
+   height: 50px;
 }
 
 .header .header-1 .flex .share a{
@@ -357,12 +358,12 @@ section{
 }
 
 .products .box-container{
-   max-width: 1200px;
+   max-width: 100%;
    margin:0 auto;
    display: grid;
    grid-template-columns: repeat(auto-fit, 30rem);
    align-items: flex-start;
-   gap:1.5rem;
+   gap:2rem;
    justify-content: center;
 }
 
@@ -378,6 +379,7 @@ section{
 
 .products .box-container .box .image{
    height: 30rem;
+   width: 100%;
 }
 
 .products .box-container .box .name{
@@ -403,7 +405,7 @@ section{
    padding:1rem;
    font-size: 2.5rem;
    color:white;
-   background-color: red;
+   background-color: green;
 }
 
 .about .flex{
@@ -651,6 +653,7 @@ section{
 
 .shopping-cart .box-container .box img{
    height: 30rem;
+   width: 100%;
 }
 
 .shopping-cart .box-container .box .name{
