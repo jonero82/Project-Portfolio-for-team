@@ -1,37 +1,27 @@
 <?php
 
 include 'config.php';
-session_start();
 
 if(isset($_POST['submit'])){
 
+   $name = mysqli_real_escape_string($conn, $_POST['name']);
    $email = mysqli_real_escape_string($conn, $_POST['email']);
    $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
+   $cpass = mysqli_real_escape_string($conn, md5($_POST['cpassword']));
+   $user_type = $_POST['user_type'];
 
    $select_users = mysqli_query($conn, "SELECT * FROM `users` WHERE email = '$email' AND password = '$pass'") or die('query failed');
 
    if(mysqli_num_rows($select_users) > 0){
-
-      $row = mysqli_fetch_assoc($select_users);
-
-      if($row['user_type'] == 'admin'){
-
-         $_SESSION['admin_name'] = $row['name'];
-         $_SESSION['admin_email'] = $row['email'];
-         $_SESSION['admin_id'] = $row['id'];
-         header('location:admin_page.php');
-
-      }elseif($row['user_type'] == 'user'){
-
-         $_SESSION['user_name'] = $row['name'];
-         $_SESSION['user_email'] = $row['email'];
-         $_SESSION['user_id'] = $row['id'];
-         header('location:home.php');
-
-      }
-
+      $message[] = 'user already exist!';
    }else{
-      $message[] = 'incorrect email or password!';
+      if($pass != $cpass){
+         $message[] = 'confirm password not matched!';
+      }else{
+         mysqli_query($conn, "INSERT INTO `users`(name, email, password, user_type) VALUES('$name', '$email', '$cpass', '$user_type')") or die('query failed');
+         $message[] = 'registered successfully!';
+         header('location:login.php');
+      }
    }
 
 }
@@ -44,10 +34,9 @@ if(isset($_POST['submit'])){
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>login</title>
+   <title>register</title>
 
    <!--font awesome cdn link-->
-   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
    <!--css file link-->
@@ -55,6 +44,8 @@ if(isset($_POST['submit'])){
 
 </head>
 <body>
+
+
 
 <?php
 if(isset($message)){
@@ -72,11 +63,17 @@ if(isset($message)){
 <div class="form-container">
 
    <form action="" method="post">
-      <h3>login</h3>
+      <h3>Register</h3>
+      <input type="text" name="name" placeholder="Enter your name" required class="box">
       <input type="email" name="email" placeholder="Enter your email" required class="box">
       <input type="password" name="password" placeholder="Enter your password" required class="box">
-      <input type="submit" name="submit" value="login" class="btn">
-      <p>Don't have an account? <a href="register.html">Register here</a></p>
+      <input type="password" name="cpassword" placeholder="Confirm your password" required class="box">
+      <select name="user_type" class="box">
+         <option value="user">user</option>
+         <option value="admin">admin</option>
+      </select>
+      <input type="submit" name="submit" value="Register" class="btn">
+      <p>Already have an account? <a href="login.php">Login here</a></p>
    </form>
 
 </div>
