@@ -31,9 +31,9 @@ if(isset($message)){
 
    <div class="header-2">
       <div class="flex">
-         <a href="home.php" class="logo"><img src="./assets/logo.png" alt="farmers market logo"></a>
+         <a href="index.php" class="logo"><img src="./assets/logo.png" alt="farmers market logo"></a>
          <nav class="navbar">
-            <a href="home.php">Home</a>
+            <a href="index.php">Home</a>
             <a href="shop.php">Shop</a>
             <a href="about.php">About</a>
             <a href="contact.php">Contact</a>
