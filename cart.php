@@ -50,7 +50,7 @@ if(isset($_GET['delete_all'])){
 <?php include 'header.php'; ?>
 
 <div class="heading">
-   <p> <a href="home.php">Home</a> / Cart </p>
+   <p> <a href="index.php">Home</a> / Cart </p>
 </div>
 
 <section class="shopping-cart">

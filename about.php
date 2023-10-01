@@ -32,7 +32,7 @@ if(!isset($user_id)){
 <?php include 'header.php'; ?>
 
 <div class="heading">
-   <p> <a href="home.php">Home</a> / About </p>
+   <p> <a href="index.php">Home</a> / About </p>
 </div>
 
 <section class="about">
